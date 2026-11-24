@@ -26,6 +26,7 @@
 
   --font: "Huninn", "Zen Maru Gothic", "PingFang TC", "Hiragino Maru Gothic ProN", system-ui, sans-serif;
 }
+html[lang="en"] .bottom-nav a { min-width: 64px; }
 html[lang="ja"] { --font: "Zen Maru Gothic", "Huninn", "Hiragino Maru Gothic ProN", system-ui, sans-serif; }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -90,17 +91,20 @@ button { font: inherit; color: inherit; cursor: pointer; }
 }
 
 /* ---------- 語言切換 ---------- */
-.lang-toggle {
-  position: fixed; top: calc(12px + env(safe-area-inset-top)); right: 12px; z-index: 60;
-  padding: 4px 12px;
-  background: var(--cream-2); border: var(--border); border-radius: 999px;
+.lang {
+  position: fixed; z-index: 60;
+  top: calc(12px + env(safe-area-inset-top)); right: 12px;
+  display: flex; padding: 3px;
+  background: var(--cream-2); border: 2.5px solid var(--brown); border-radius: 999px;
   box-shadow: 0 3px 0 var(--brown);
-  font-weight: 700;
 }
-.lang-toggle span[data-lang] { opacity: .35; transition: opacity .2s; }
-.lang-toggle .sep { opacity: .35; margin: 0 4px; }
-html[lang="zh-Hant"] .lang-toggle [data-lang="zh"],
-html[lang="ja"] .lang-toggle [data-lang="ja"] { opacity: 1; }
+.lang button {
+  min-width: 40px; min-height: 34px; padding: 0 10px;
+  border: 0; border-radius: 999px; background: transparent;
+  font: inherit; font-size: .9rem; font-weight: 700; color: var(--brown-soft); cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.lang button[aria-pressed="true"] { background: var(--apricot); color: var(--brown); }
 
 /* =========================================================
    ① 開場

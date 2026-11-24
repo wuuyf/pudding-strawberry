@@ -14,7 +14,7 @@ const CONFIG = {
 };
 
 /* =========================================================
-   文案（中文 / 日文）
+   文案（中文 / 日文 / 英文）
    ========================================================= */
 const TEXT = {
   "zh-Hant": {
@@ -81,6 +81,38 @@ const TEXT = {
     navKitten: "子猫",
     navGallery: "写真",
   },
+  en: {
+    title: "Pudding & Strawberry",
+    subtitle: "Our two senior cats",
+    skip: "Skip",
+    introQ: "Who's in there?",
+    introHi: "Hi! We're Pudding and Strawberry 👋",
+    introDown: "Scroll down to meet us",
+    profilesTitle: "Meet us",
+    swipeHint: "← Swipe →",
+    puddingName: "Pudding",
+    strawberryName: "Strawberry",
+    age: "Age",
+    weight: "Weight",
+    gender: "I'm a",
+    boy: "Boy",
+    girl: "Girl",
+    ageUnit: (n) => `${n} yrs`,
+    puddingTags: ["Cuddly", "Goofy", "Foodie", "Shy around men"],
+    strawberryTags: ["Sassy", "Cuddly", "Hug demander", "Playful"],
+    puddingText:
+      "Pudding is our big boy, with lighter fur and a round 7.2 kg body. He's goofy, super cuddly and loves his food. His one weakness: he's a little scared of men.",
+    strawberryText:
+      "Strawberry is our petite girl, with darker fur and only 4.5 kg. She's sassy and full of energy, but secretly a total sweetheart who's always asking to be held.",
+    kittenTitle: "As kittens",
+    kittenText: "When they first came home, they were this tiny!",
+    galleryTitle: "Photos & Drawings",
+    illustSoon: "Drawings coming soon ✏️",
+    thanks: "Thanks for stopping by 🐾",
+    replay: "Replay the intro",
+    navKitten: "Kittens",
+    navGallery: "Photos",
+  },
 };
 
 /* =========================================================
@@ -118,16 +150,19 @@ function applyLang(lang) {
   const age = new Date().getFullYear() - CONFIG.birthYear;
   $$("[data-age]").forEach((el) => (el.textContent = t.ageUnit(age)));
   document.title = `${t.title} 🐾`;
+  $$(".lang button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
   store.set("lang", lang);
 }
 
+// 先用上次選的語言；沒有的話，看手機語言（日文→日、中文→中、其他→英）
+const guessLang = () => {
+  const nav = (navigator.language || "").toLowerCase();
+  return nav.startsWith("ja") ? "ja" : nav.startsWith("zh") ? "zh-Hant" : "en";
+};
 const savedLang = store.get("lang");
-const initialLang = savedLang || (navigator.language.startsWith("ja") ? "ja" : "zh-Hant");
-applyLang(initialLang);
+applyLang(TEXT[savedLang] ? savedLang : guessLang());
 
-$("#langToggle").addEventListener("click", () => {
-  applyLang(document.documentElement.lang === "ja" ? "zh-Hant" : "ja");
-});
+$$(".lang button").forEach((b) => b.addEventListener("click", () => applyLang(b.dataset.lang)));
 
 /* ---------- ① 開場驚喜 ---------- */
 const intro = $("#intro");

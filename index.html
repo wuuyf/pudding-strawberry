@@ -26,9 +26,11 @@
   <div class="bg-veil" aria-hidden="true"></div>
 
   <!-- 語言切換 -->
-  <button class="lang-toggle" id="langToggle" aria-label="切換語言 / 言語切替">
-    <span data-lang="zh">中</span><span class="sep">/</span><span data-lang="ja">日</span>
-  </button>
+  <div class="lang" role="group" aria-label="Language / 語言 / 言語">
+    <button type="button" data-lang="zh-Hant">中</button>
+    <button type="button" data-lang="ja">日</button>
+    <button type="button" data-lang="en">EN</button>
+  </div>
 
   <!-- ① 開場驚喜 -->
   <div class="intro" id="intro" role="dialog" aria-modal="true">
