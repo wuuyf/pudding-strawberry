@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>布丁 & 草莓 🐾</title>
+  <meta name="description" content="我家兩隻老貓咪：布丁和草莓的小網頁" />
+
+  <!-- IG / LINE 分享預覽 -->
+  <meta property="og:title" content="布丁 & 草莓 🐾" />
+  <meta property="og:description" content="誰在裡面？點進來看看我家的兩隻貓咪" />
+  <meta property="og:image" content="https://wuuyf.github.io/pudding-strawberry/images/og.jpg" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Huninn&family=Zen+Maru+Gothic:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="intro-open">
+  <!-- 淡化的背景照片（照片在 script.js 的 CONFIG 設定） -->
+  <div class="bg-photo" aria-hidden="true"></div>
+  <div class="bg-veil" aria-hidden="true"></div>
+
+  <!-- 語言切換 -->
+  <button class="lang-toggle" id="langToggle" aria-label="切換語言 / 言語切替">
+    <span data-lang="zh">中</span><span class="sep">/</span><span data-lang="ja">日</span>
+  </button>
+
+  <!-- ① 開場驚喜 -->
+  <div class="intro" id="intro" role="dialog" aria-modal="true">
+    <button class="intro-skip" id="introSkip" data-i18n="skip">略過</button>
+
+    <div class="intro-stage" id="introStage">
+      <img class="intro-img intro-hidden" src="images/intro-hidden.webp" alt="兩隻貓被拳頭貼圖遮住臉" />
+      <img class="intro-img intro-reveal" src="images/intro-reveal.webp" alt="布丁和草莓揮手打招呼" />
+      <div class="burst" id="burst" aria-hidden="true"></div>
+    </div>
+
+    <div class="intro-actions">
+      <button class="btn-cute btn-bounce" id="introKnock">
+        <span>👊</span> <span data-i18n="introQ">誰在裡面？</span>
+      </button>
+      <p class="intro-hi" data-i18n="introHi">嗨！我們是布丁和草莓 👋</p>
+      <button class="btn-cute intro-down" id="introDown">
+        <span data-i18n="introDown">往下看看我們</span> <span class="arrow">↓</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 主內容 -->
+  <header class="site-header gingham">
+    <div class="wrap">
+      <h1 class="title-bubble">
+        <span class="flower">🌻</span>
+        <span data-i18n="title">布丁 & 草莓</span>
+      </h1>
+      <p class="subtitle" data-i18n="subtitle">我家的兩隻老貓咪</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <!-- ② 認識我們：左右滑的檔案卡 -->
+    <section class="section" id="profiles">
+      <h2 class="section-title"><span>🐾</span> <span data-i18n="profilesTitle">認識我們</span></h2>
+
+      <div class="carousel carousel--peek" data-carousel>
+        <div class="track">
+          <!-- 布丁 -->
+          <article class="profile-card slide pudding">
+            <div class="avatar"><img src="images/pudding-2.webp" alt="布丁" loading="lazy" /></div>
+            <h3 class="profile-name">🍮 <span data-i18n="puddingName">布丁</span></h3>
+            <dl class="stats">
+              <div><dt data-i18n="age">年齡</dt><dd class="age" data-age></dd></div>
+              <div><dt data-i18n="weight">體重</dt><dd>7.2 kg</dd></div>
+              <div><dt data-i18n="gender">性別</dt><dd data-i18n="boy">男生</dd></div>
+            </dl>
+            <ul class="tags" data-i18n-list="puddingTags"></ul>
+          </article>
+
+          <!-- 草莓 -->
+          <article class="profile-card slide strawberry">
+            <div class="avatar"><img src="images/strawberry-2.webp" alt="草莓" loading="lazy" /></div>
+            <h3 class="profile-name">🍓 <span data-i18n="strawberryName">草莓</span></h3>
+            <dl class="stats">
+              <div><dt data-i18n="age">年齡</dt><dd class="age" data-age></dd></div>
+              <div><dt data-i18n="weight">體重</dt><dd>4.5 kg</dd></div>
+              <div><dt data-i18n="gender">性別</dt><dd data-i18n="girl">女生</dd></div>
+            </dl>
+            <ul class="tags" data-i18n-list="strawberryTags"></ul>
+          </article>
+        </div>
+        <div class="dots"></div>
+      </div>
+      <p class="hint" data-i18n="swipeHint">← 左右滑滑看 →</p>
+    </section>
+
+    <!-- ③ 布丁 -->
+    <section class="section cat-section pudding" id="pudding">
+      <h2 class="section-title"><span>🍮</span> <span data-i18n="puddingName">布丁</span></h2>
+
+      <div class="carousel" data-carousel>
+        <div class="track">
+          <figure class="slide"><img src="images/pudding-1.webp" alt="布丁躲在椅子下" loading="lazy" /></figure>
+          <figure class="slide"><img src="images/pudding-2.webp" alt="布丁在沙發上伸手" loading="lazy" /></figure>
+          <figure class="slide"><img src="images/pudding-3.webp" alt="布丁睡翻" loading="lazy" style="object-position: 60% 50%" /></figure>
+        </div>
+        <button class="nav-btn prev" aria-label="上一張">‹</button>
+        <button class="nav-btn next" aria-label="下一張">›</button>
+        <div class="dots"></div>
+      </div>
+
+      <p class="speech" data-i18n="puddingText"></p>
+    </section>
+
+    <!-- ④ 草莓 -->
+    <section class="section cat-section strawberry" id="strawberry">
+      <h2 class="section-title"><span>🍓</span> <span data-i18n="strawberryName">草莓</span></h2>
+
+      <div class="carousel" data-carousel>
+        <div class="track">
+          <figure class="slide"><img src="images/strawberry-1.webp" alt="草莓靠在手上睡覺" loading="lazy" /></figure>
+          <figure class="slide"><img src="images/strawberry-2.webp" alt="草莓趴在床上" loading="lazy" /></figure>
+          <figure class="slide"><img src="images/strawberry-3.webp" alt="草莓抬頭看" loading="lazy" /></figure>
+          <figure class="slide"><img src="images/strawberry-4.webp" alt="草莓睡臉" loading="lazy" /></figure>
+        </div>
+        <button class="nav-btn prev" aria-label="上一張">‹</button>
+        <button class="nav-btn next" aria-label="下一張">›</button>
+        <div class="dots"></div>
+      </div>
+
+      <p class="speech" data-i18n="strawberryText"></p>
+    </section>
+
+    <!-- ⑤ 小時候 -->
+    <section class="section" id="kitten">
+      <h2 class="section-title"><span>🍼</span> <span data-i18n="kittenTitle">小時候</span></h2>
+      <figure class="polaroid" data-lightbox>
+        <img src="images/kitten.webp" alt="小時候的布丁和草莓" loading="lazy" />
+        <figcaption data-i18n="kittenText"></figcaption>
+      </figure>
+    </section>
+
+    <!-- ⑥ 合照 & 插圖 -->
+    <section class="section" id="gallery">
+      <h2 class="section-title"><span>📷</span> <span data-i18n="galleryTitle">合照 & 插圖</span></h2>
+      <div class="gallery">
+        <figure data-lightbox><img src="images/together-2.webp" alt="布丁和草莓坐在一起" loading="lazy" /></figure>
+        <figure data-lightbox><img src="images/together-1.webp" alt="布丁和草莓躲在毯子裡" loading="lazy" /></figure>
+        <!--
+          ✏️ 插圖放這裡：把檔案放進 images/，然後把下面這個 placeholder 換成
+          <figure data-lightbox><img src="images/你的插圖.webp" alt="插圖說明" loading="lazy" /></figure>
+        -->
+        <figure class="placeholder"><span data-i18n="illustSoon">插圖準備中 ✏️</span></figure>
+      </div>
+    </section>
+  </main>
+
+  <!-- ⑦ 頁尾 -->
+  <footer class="site-footer gingham">
+    <div class="wrap">
+      <p data-i18n="thanks">謝謝你來看我們 🐾</p>
+      <div class="footer-links">
+        <button class="btn-cute small" id="replayIntro" data-i18n="replay">再看一次開場</button>
+        <a class="btn-cute small" id="linktreeLink" href="#" target="_blank" rel="noopener" hidden>Linktree</a>
+        <a class="btn-cute small" id="githubLink" href="#" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="copyright">© <span id="year"></span> Yuu</p>
+    </div>
+  </footer>
+
+  <!-- 底部小圓鈕列 -->
+  <nav class="bottom-nav" aria-label="快速跳轉">
+    <a href="#pudding"><span class="ico">🍮</span><span data-i18n="puddingName">布丁</span></a>
+    <a href="#strawberry"><span class="ico">🍓</span><span data-i18n="strawberryName">草莓</span></a>
+    <a href="#kitten"><span class="ico">🍼</span><span data-i18n="navKitten">小時候</span></a>
+    <a href="#gallery"><span class="ico">📷</span><span data-i18n="navGallery">合照</span></a>
+  </nav>
+
+  <!-- 點開大圖 -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox-close" aria-label="關閉">✕</button>
+    <img alt="" />
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
