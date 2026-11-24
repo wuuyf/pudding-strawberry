@@ -244,6 +244,8 @@ html[lang="ja"] .lang-toggle [data-lang="ja"] { opacity: 1; }
   font-size: 1.5rem; line-height: 1; padding: 0 0 4px;
   box-shadow: 0 3px 0 var(--brown);
 }
+.nav-btn { transition: opacity .25s, transform .12s, box-shadow .12s; }
+.nav-btn.is-hidden { opacity: 0; pointer-events: none; }
 .nav-btn.prev { left: 8px; }
 .nav-btn.next { right: 8px; }
 .nav-btn:active { transform: translateY(calc(-50% + 2px)); box-shadow: 0 1px 0 var(--brown); }

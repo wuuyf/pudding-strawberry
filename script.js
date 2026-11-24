@@ -53,7 +53,7 @@ const TEXT = {
     title: "プリン & いちご",
     subtitle: "うちのシニア猫ふたり",
     skip: "スキップ",
-    introQ: "だれがいるの？",
+    introQ: "だれかいるのかな？",
     introHi: "こんにちは！プリンといちごです 👋",
     introDown: "もっと見る",
     profilesTitle: "はじめまして",
@@ -194,14 +194,20 @@ $$("[data-carousel]").forEach((carousel) => {
     return best;
   };
 
+  const prevBtn = $(".prev", carousel);
+  const nextBtn = $(".next", carousel);
+
   function goTo(i) {
-    const s = slides[(i + slides.length) % slides.length];
+    const s = slides[Math.max(0, Math.min(i, slides.length - 1))];
     track.scrollTo({ left: s.offsetLeft - (track.clientWidth - s.offsetWidth) / 2, behavior: "smooth" });
   }
 
   function update() {
     const c = current();
     dots.forEach((d, i) => d.classList.toggle("active", i === c));
+    // 第一張隱藏「上一張」、最後一張隱藏「下一張」
+    prevBtn?.classList.toggle("is-hidden", c === 0);
+    nextBtn?.classList.toggle("is-hidden", c === slides.length - 1);
   }
 
   track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
@@ -239,8 +245,8 @@ $$("[data-carousel]").forEach((carousel) => {
     if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current() - 1); }
     if (e.key === "ArrowRight") { e.preventDefault(); goTo(current() + 1); }
   });
-  $(".prev", carousel)?.addEventListener("click", () => goTo(current() - 1));
-  $(".next", carousel)?.addEventListener("click", () => goTo(current() + 1));
+  prevBtn?.addEventListener("click", () => goTo(current() - 1));
+  nextBtn?.addEventListener("click", () => goTo(current() + 1));
   update();
 });
 
