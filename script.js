@@ -205,6 +205,40 @@ $$("[data-carousel]").forEach((carousel) => {
   }
 
   track.addEventListener("scroll", () => requestAnimationFrame(update), { passive: true });
+
+  // 滑鼠拖曳（電腦用滑鼠也能左右拖；觸控板、手機原本就能滑）
+  let dragging = false, moved = false, startX = 0, startLeft = 0;
+  track.addEventListener("pointerdown", (e) => {
+    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    dragging = true; moved = false;
+    startX = e.clientX; startLeft = track.scrollLeft;
+    track.classList.add("dragging");
+  });
+  window.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const dx = e.clientX - startX;
+    if (Math.abs(dx) > 5) moved = true;
+    track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener("pointerup", () => {
+    if (!dragging) return;
+    dragging = false;
+    const target = current();
+    track.classList.remove("dragging");
+    goTo(target);
+  });
+  // 拖曳結束時不要誤觸「點圖放大」
+  track.addEventListener("click", (e) => {
+    if (moved) { e.stopPropagation(); e.preventDefault(); moved = false; }
+  }, true);
+  track.addEventListener("dragstart", (e) => e.preventDefault());
+
+  // 鍵盤左右鍵
+  track.tabIndex = 0;
+  track.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") { e.preventDefault(); goTo(current() - 1); }
+    if (e.key === "ArrowRight") { e.preventDefault(); goTo(current() + 1); }
+  });
   $(".prev", carousel)?.addEventListener("click", () => goTo(current() - 1));
   $(".next", carousel)?.addEventListener("click", () => goTo(current() + 1));
   update();
